@@ -16,18 +16,22 @@ stages:
         steps:
           - script: echo Build job
             displayName: Print Information
+          - script: npm install
+            displayName: Install npm
           - script: 
               echo Add other tasks to build, test, and deploy your project.
               echo See https://aka.ms/yaml
             displayName: 'Run a multi-line script'
           - script: 
               npm install @salesforce/cli --global
+
   - stage: deploy
     jobs:
       - job: deployJob
         steps: 
           - script: echo build job
             displayName: 'Run a build job'
+
   - stage: test
     jobs:
       - job: TestJob

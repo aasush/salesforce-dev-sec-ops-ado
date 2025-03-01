@@ -9,11 +9,33 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+  - stage: build
+    jobs:
+      - job: buildjob
+        steps:
+          - script: echo Hello, world!
+            displayName: 'Run a one-line script'
+          - script: echo Add other tasks to build, test, and deploy your project.
+                    echo See https://aka.ms/yaml
+            displayName: 'Run a multi-line script'
+          - script: npm install @salesforce/cli --global
+                    sf --version
+          - checkout: self
+            fetchDepth: 0
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  - stage: deploy
+    jobs:
+      - job: deployjob
+        steps:
+          - script: echo Hello, World
+            displayName: 'Run one-line script'
+
+  - stage: test
+    jobs: 
+      - job: testjob
+        steps:
+          - script: echi hello
+            displayName: 'Run one-line script'
+
+

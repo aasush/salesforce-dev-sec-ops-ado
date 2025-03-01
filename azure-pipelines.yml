@@ -35,7 +35,7 @@ stages:
     jobs: 
       - job: testjob
         steps:
-          - script: echi hello
+          - script: echo hello
             displayName: 'Run one-line script'
 
 
